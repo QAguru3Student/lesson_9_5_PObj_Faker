@@ -1,0 +1,35 @@
+plugins {
+    id 'java-library'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation (
+            group: 'com.github.javafaker', name: 'javafaker', version: '0.12',
+            "com.codeborne:selenide:5.25.0",
+            "org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.1"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task one_test(type: Test) {
+    useJUnitPlatform {
+        includeTags 'one'
+    }
+}
+
+task without_one_test(type: Test) {
+    useJUnitPlatform {
+        excludeTags 'one'
+    }
+}
